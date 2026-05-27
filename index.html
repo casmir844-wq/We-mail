@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0a0a12" />
+  <title>WE-MAIL 😎</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── AMBIENT BACKGROUND ── -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="scanlines"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- ── TOAST NOTIFICATION ── -->
+  <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+  <!-- ══════════════════════════════
+       APP CONTAINER
+  ══════════════════════════════ -->
+  <div class="app-container">
+
+    <!-- ── HEADER ── -->
+    <header class="app-header glass-panel">
+      <div class="header-left">
+        <div class="app-wordmark">WE-MAIL <span class="emoji-glow">😎</span></div>
+        <div id="greeting" class="header-greeting">Loading...</div>
+      </div>
+      <div class="header-right">
+        <div class="xp-badge">
+          <div class="level-ring" id="levelRingHeader">
+            <svg viewBox="0 0 44 44" class="ring-svg">
+              <circle class="ring-track" cx="22" cy="22" r="18"/>
+              <circle class="ring-fill" id="ringFillHeader" cx="22" cy="22" r="18"/>
+            </svg>
+            <span class="level-num" id="levelNumHeader">1</span>
+          </div>
+          <div class="xp-info">
+            <span class="xp-label">XP</span>
+            <span class="xp-value" id="xpValue">0</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════ PAGE: HOME ══════ -->
+    <main class="page active" id="page-home">
+
+      <!-- STREAK CARD -->
+      <section class="streak-card glass-panel glow-border" id="streakCard">
+        <div class="streak-icon" id="streakFlame">🔥</div>
+        <div class="streak-body">
+          <div class="streak-count"><span id="streakCount">0</span> day streak</div>
+          <div class="streak-sub" id="streakSub">Start your streak today!</div>
+        </div>
+        <div class="streak-badge" id="streakBadge">NEW</div>
+      </section>
+
+      <!-- MAIL INBOX HEADER -->
+      <div class="section-header">
+        <span class="section-title">📬 Inbox</span>
+        <span class="section-sub" id="taskCounter">0 missions pending</span>
+      </div>
+
+      <!-- FILTER TABS -->
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="pending">Pending</button>
+        <button class="filter-tab" data-filter="done">Completed</button>
+      </div>
+
+      <!-- TASK LIST (MAIL CARDS) -->
+      <div class="task-list" id="taskList">
+        <!-- tasks injected here -->
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div class="empty-state" id="emptyState" style="display:none">
+        <div class="empty-icon">📭</div>
+        <div class="empty-title">Inbox Zero</div>
+        <div class="empty-sub">No missions. Tap <strong>+</strong> to create one.</div>
+      </div>
+
+    </main>
+
+    <!-- ══════ PAGE: MISSIONS ══════ -->
+    <main class="page" id="page-missions">
+      <div class="section-header">
+        <span class="section-title">🎯 Daily Missions</span>
+        <span class="section-sub">Boost your XP</span>
+      </div>
+      <div class="missions-grid" id="missionsGrid">
+        <!-- injected by JS -->
+      </div>
+    </main>
+
+    <!-- ══════ PAGE: REWARDS ══════ -->
+    <main class="page" id="page-rewards">
+      <div class="section-header">
+        <span class="section-title">🏆 Rewards</span>
+        <span class="section-sub">Unlock with XP</span>
+      </div>
+      <div class="rewards-grid" id="rewardsGrid">
+        <!-- injected by JS -->
+      </div>
+    </main>
+
+    <!-- ══════ PAGE: PROFILE ══════ -->
+    <main class="page" id="page-profile">
+      <div class="profile-hero glass-panel glow-border">
+        <div class="profile-avatar" id="profileAvatar">🎓</div>
+        <div class="profile-name" id="profileName">Agent</div>
+        <div class="profile-title" id="profileTitle">Rookie Sender</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card glass-panel">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-val" id="statXP">0</div>
+          <div class="stat-label">Total XP</div>
+        </div>
+        <div class="stat-card glass-panel">
+          <div class="stat-icon">✅</div>
+          <div class="stat-val" id="statDone">0</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card glass-panel">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-val" id="statStreak">0</div>
+          <div class="stat-label">Streak</div>
+        </div>
+        <div class="stat-card glass-panel">
+          <div class="stat-icon">🏅</div>
+          <div class="stat-val" id="statLevel">1</div>
+          <div class="stat-label">Level</div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:24px">
+        <span class="section-title">📧 Email Reminder</span>
+      </div>
+      <form class="email-form glass-panel" id="emailForm" onsubmit="return false;">
+        <input type="text" class="input-field" id="emailName" placeholder="Your name" maxlength="40" />
+        <input type="email" class="input-field" id="emailAddr" placeholder="your@email.com" />
+        <textarea class="input-field textarea-field" id="emailMsg" placeholder="Write your mission brief..." rows="3" maxlength="280"></textarea>
+        <button class="btn-send" id="sendEmailBtn" type="button">
+          <span>📨 Send Mission Brief</span>
+        </button>
+      </form>
+
+      <button class="btn-reset" id="resetBtn">⚠️ Reset All Data</button>
+    </main>
+
+    <!-- ══════ BOTTOM NAV ══════ -->
+    <nav class="bottom-nav glass-panel">
+      <button class="nav-item active" data-page="home">
+        <span class="nav-icon">📬</span>
+        <span class="nav-label">Inbox</span>
+      </button>
+      <button class="nav-item" data-page="missions">
+        <span class="nav-icon">🎯</span>
+        <span class="nav-label">Missions</span>
+      </button>
+      <button class="nav-item" data-page="rewards">
+        <span class="nav-icon">🏆</span>
+        <span class="nav-label">Rewards</span>
+      </button>
+      <button class="nav-item" data-page="profile">
+        <span class="nav-icon">👤</span>
+        <span class="nav-label">Profile</span>
+      </button>
+    </nav>
+
+    <!-- ══════ FAB BUTTON ══════ -->
+    <button class="fab" id="fabBtn" aria-label="Add new mission">
+      <span class="fab-plus">+</span>
+    </button>
+
+  </div><!-- /app-container -->
+
+
+  <!-- ══════ ADD TASK MODAL ══════ -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal glass-panel" id="addModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div id="modalTitle" class="modal-title">📝 New Mission</div>
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+
+      <input type="text" class="input-field" id="taskTitle" placeholder="Mission subject..." maxlength="60" />
+
+      <div class="priority-row">
+        <span class="priority-label">Priority:</span>
+        <div class="priority-buttons">
+          <button class="priority-btn active" data-p="low">🟢 Low</button>
+          <button class="priority-btn" data-p="medium">🟡 Medium</button>
+          <button class="priority-btn" data-p="high">🔴 High</button>
+        </div>
+      </div>
+
+      <div class="priority-row">
+        <span class="priority-label">Category:</span>
+        <div class="priority-buttons">
+          <button class="cat-btn active" data-c="study">📚 Study</button>
+          <button class="cat-btn" data-c="health">💪 Health</button>
+          <button class="cat-btn" data-c="social">💬 Social</button>
+          <button class="cat-btn" data-c="other">⚡ Other</button>
+        </div>
+      </div>
+
+      <div class="due-row">
+        <span class="priority-label">Due date:</span>
+        <input type="date" class="input-field date-input" id="taskDue" />
+      </div>
+
+      <button class="btn-launch" id="launchMission">🚀 Launch Mission</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
